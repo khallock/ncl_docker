@@ -1,0 +1,8 @@
+FROM debian:jessie
+
+ENV NCARG_ROOT /usr/local/ncl-6.4.0
+
+RUN apt-get update && apt-get install -y libxrender1 libfontconfig1 libxext6 libgfortran3 libgomp1 wget && wget --content-disposition https://www.earthsystemgrid.org/download/fileDownload.html?logicalFileId=154af009-fa02-11e6-a976-00c0f03d5b7c && mkdir "$NCARG_ROOT" && tar -zxf ncl_ncarg-6.4.0-Debian8.6_64bit_gnu492.tar.gz -C "$NCARG_ROOT" && rm ncl_ncarg-6.4.0-Debian8.6_64bit_gnu492.tar.gz && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/usr/local/ncl-6.4.0/bin/ncl"]
+WORKDIR /ncl
